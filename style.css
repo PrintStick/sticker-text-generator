@@ -1,13 +1,16 @@
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont;
   padding: 20px;
+  background: #f8f8f8;
 }
 
 .controls {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 10; /* ensures controls are above canvas */
 }
 
 .input-row {
@@ -19,15 +22,18 @@ body {
 input[type="text"], select {
   padding: 5px;
   font-size: 16px;
-  min-width: 120px;
+  min-width: 150px;
+  z-index: 10;
 }
 
 select {
-  min-width: 150px;
-  z-index: 100;
+  min-width: 200px;
 }
 
 canvas {
   border: 1px dashed #ccc;
   margin-top: 10px;
+  position: relative;
+  z-index: 1;
+  background: transparent;
 }
