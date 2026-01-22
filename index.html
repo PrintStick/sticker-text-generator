@@ -8,32 +8,63 @@
 <body>
 
   <div class="controls">
-    <input id="textInput" placeholder="Type your word" />
 
-    <select id="fontSelect"></select>
-
-    <label>Text Color <input type="color" id="textColor" value="#000000"></label>
-    <label>Thin Outline <input type="color" id="thinOutlineColor" value="#ffffff"></label>
-    <label>Thick Outline <input type="color" id="thickOutlineColor" value="#ff69b4"></label>
-
+    <!-- Text input + Update button -->
     <label>
-      <input type="checkbox" id="shadowToggle">
-      Drop Shadow
+      Type Word:
+      <input id="textInput" placeholder="Type your word" />
+      <button id="updateButton">Update</button>
     </label>
 
-    <label>Shadow Color <input type="color" id="shadowColor" value="#000000"></label>
-    <label>Blur <input type="range" id="shadowBlur" min="0" max="50" value="20"></label>
-    <label>X <input type="range" id="shadowX" min="-50" max="50" value="8"></label>
-    <label>Y <input type="range" id="shadowY" min="-50" max="50" value="8"></label>
+    <!-- Font selection -->
+    <select id="fontSelect"></select>
 
-    <input type="file" id="fontUpload" accept=".ttf,.otf" />
+    <!-- Text Color -->
+    <label>
+      Text Color:
+      <input type="color" id="textColor" value="#000000">
+      <input type="text" id="textColorHex" placeholder="#000000" maxlength="7">
+    </label>
 
+    <!-- Thin Outline -->
+    <label>
+      Thin Outline:
+      <input type="color" id="thinOutlineColor" value="#ffffff">
+      <input type="text" id="thinOutlineHex" placeholder="#ffffff" maxlength="7">
+    </label>
+
+    <!-- Thick Outline -->
+    <label>
+      Thick Outline:
+      <input type="color" id="thickOutlineColor" value="#ff69b4">
+      <input type="text" id="thickOutlineHex" placeholder="#ff69b4" maxlength="7">
+    </label>
+
+    <!-- Drop Shadow -->
+    <label>
+      <input type="checkbox" id="shadowToggle"> Drop Shadow
+    </label>
+
+    <label>
+      Shadow Color:
+      <input type="color" id="shadowColor" value="#000000">
+      <input type="text" id="shadowHex" placeholder="#000000" maxlength="7">
+    </label>
+    <label>Blur: <input type="range" id="shadowBlur" min="0" max="50" value="20"></label>
+    <label>X: <input type="range" id="shadowX" min="-50" max="50" value="8"></label>
+    <label>Y: <input type="range" id="shadowY" min="-50" max="50" value="8"></label>
+
+    <!-- Font Upload (optional) -->
+    <label>
+      Upload Custom Font:
+      <input type="file" id="fontUpload" accept=".ttf,.otf" />
+    </label>
+
+    <!-- Export -->
     <button id="exportPNG">Export PNG</button>
+
   </div>
 
   <canvas id="canvas" width="800" height="400"></canvas>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/6.0.0/fabric.min.js"></script>
-  <script src="app.js"></script>
-</body>
-</html>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/6.0.0/
