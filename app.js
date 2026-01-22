@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  console.log("DOM loaded, JS running");
-
   const canvas = new fabric.Canvas("canvas", { backgroundColor: "transparent" });
 
   // Elements
@@ -37,7 +35,26 @@ document.addEventListener("DOMContentLoaded", () => {
     fontSelect.appendChild(opt);
   });
 
-  // Helper for shadow
+  // Sync color pickers with hex input
+  function syncColor(colorInput, hexInput) {
+    colorInput.addEventListener("input", () => {
+      hexInput.value = colorInput.value;
+      updateSticker();
+    });
+    hexInput.addEventListener("input", () => {
+      if(/^#([0-9A-Fa-f]{3}){1,2}$/.test(hexInput.value)) {
+        colorInput.value = hexInput.value;
+        updateSticker();
+      }
+    });
+  }
+
+  syncColor(textColor, textColorHex);
+  syncColor(thinOutlineColor, thinOutlineHex);
+  syncColor(thickOutlineColor, thickOutlineHex);
+  syncColor(shadowColor, shadowHex);
+
+  // Shadow helper
   function getShadow() {
     if (!shadowToggle.checked) return null;
     return new fabric.Shadow({
@@ -48,10 +65,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Update canvas
+  // Main update function
   function updateSticker() {
     const text = textInput.value;
     if (!text) return;
+
     canvas.clear();
 
     const outline = new fabric.Text(text, {
@@ -86,32 +104,10 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.renderAll();
   }
 
-  // --- Event listeners ---
-
-  // Update on input or button
+  // Event listeners
   textInput.addEventListener("input", updateSticker);
   updateButton.addEventListener("click", updateSticker);
 
-  // Color pickers + hex fields sync
-  function syncColor(inputColor, inputHex) {
-    inputColor.addEventListener("input", () => {
-      inputHex.value = inputColor.value;
-      updateSticker();
-    });
-    inputHex.addEventListener("input", () => {
-      if(/^#([0-9A-Fa-f]{3}){1,2}$/.test(inputHex.value)) {
-        inputColor.value = inputHex.value;
-        updateSticker();
-      }
-    });
-  }
-
-  syncColor(textColor, textColorHex);
-  syncColor(thinOutlineColor, thinOutlineHex);
-  syncColor(thickOutlineColor, thickOutlineHex);
-  syncColor(shadowColor, shadowHex);
-
-  // Other controls
   [shadowToggle, shadowBlur, shadowX, shadowY, fontSelect].forEach(el => el.addEventListener("input", updateSticker));
 
   // Font upload
