@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const exportPNG = document.getElementById("exportPNG");
 
   // Default fonts
-  const fonts = ["Arial","Georgia","Verdana","Impact","system-ui","-apple-system"];
+  const fonts = ["Arial","Georgia","Verdana","Impact","Times New Roman"];
   fonts.forEach(f => {
     const opt = document.createElement("option");
     opt.value = f;
@@ -70,44 +70,48 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = textInput.value;
     if (!text) return;
 
-    canvas.clear();
+    const selectedFont = fontSelect.value;
 
-    const outline = new fabric.Text(text, {
-      fontFamily: fontSelect.value,
-      fontSize: 120,
-      fill: "transparent",
-      stroke: thickOutlineColor.value,
-      strokeWidth: 20,
-      originX: "center",
-      originY: "center"
-    });
+    // Wait for font to load (works for system and uploaded fonts)
+    document.fonts.load(`120px "${selectedFont}"`).then(() => {
+      canvas.clear();
 
-    const main = new fabric.Text(text, {
-      fontFamily: fontSelect.value,
-      fontSize: 120,
-      fill: textColor.value,
-      stroke: thinOutlineColor.value,
-      strokeWidth: 4,
-      originX: "center",
-      originY: "center"
-    });
+      const outline = new fabric.Text(text, {
+        fontFamily: selectedFont,
+        fontSize: 120,
+        fill: "transparent",
+        stroke: thickOutlineColor.value,
+        strokeWidth: 20,
+        originX: "center",
+        originY: "center"
+      });
 
-    const sticker = new fabric.Group([outline, main], {
-      left: canvas.width / 2,
-      top: canvas.height / 2,
-      originX: "center",
-      originY: "center",
-      shadow: getShadow()
-    });
+      const main = new fabric.Text(text, {
+        fontFamily: selectedFont,
+        fontSize: 120,
+        fill: textColor.value,
+        stroke: thinOutlineColor.value,
+        strokeWidth: 4,
+        originX: "center",
+        originY: "center"
+      });
 
-    canvas.add(sticker);
-    canvas.renderAll();
+      const sticker = new fabric.Group([outline, main], {
+        left: canvas.width / 2,
+        top: canvas.height / 2,
+        originX: "center",
+        originY: "center",
+        shadow: getShadow()
+      });
+
+      canvas.add(sticker);
+      canvas.renderAll();
+    }).catch(err => console.error("Font failed to load:", selectedFont, err));
   }
 
   // Event listeners
   textInput.addEventListener("input", updateSticker);
   updateButton.addEventListener("click", updateSticker);
-
   [shadowToggle, shadowBlur, shadowX, shadowY, fontSelect].forEach(el => el.addEventListener("input", updateSticker));
 
   // Font upload
