@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const selectedFont = fontSelect.value;
 
-    // Ensure font is loaded before rendering
+    // Wait for font to load
     document.fonts.load(`120px "${selectedFont}"`).then(() => {
       canvas.clear();
 
