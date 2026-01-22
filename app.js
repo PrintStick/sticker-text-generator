@@ -1,3 +1,5 @@
+console.log("updateSticker called with text:", textInput.value);
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const canvas = new fabric.Canvas("canvas", { backgroundColor: "transparent" });
