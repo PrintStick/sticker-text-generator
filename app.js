@@ -65,14 +65,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Main update function
+  // Main function to render text
   function updateSticker() {
-    const text = textInput.value;
+    const text = textInput.value.trim();
     if (!text) return;
 
     const selectedFont = fontSelect.value;
 
-    // Wait for font to load (works for system and uploaded fonts)
+    // Ensure font is loaded before rendering
     document.fonts.load(`120px "${selectedFont}"`).then(() => {
       canvas.clear();
 
