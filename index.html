@@ -51,4 +51,26 @@
       Shadow Color:
       <input type="color" id="shadowColor" value="#000000">
       <input type="text" id="shadowHex" placeholder="#000000" maxlength="7">
-    </labe
+    </label>
+
+    <label>Blur: <input type="range" id="shadowBlur" min="0" max="50" value="20"></label>
+    <label>X: <input type="range" id="shadowX" min="-50" max="50" value="8"></label>
+    <label>Y: <input type="range" id="shadowY" min="-50" max="50" value="8"></label>
+
+    <!-- Font Upload -->
+    <label>
+      Upload Custom Font:
+      <input type="file" id="fontUpload" accept=".ttf,.otf" />
+    </label>
+
+    <!-- Export PNG -->
+    <button id="exportPNG">Export PNG</button>
+
+  </div>
+
+  <canvas id="canvas" width="800" height="400"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/6.0.0/fabric.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
