@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sticker Text Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="controls">
+    <input id="textInput" placeholder="Type your word" />
+
+    <select id="fontSelect"></select>
+
+    <label>Text Color <input type="color" id="textColor" value="#000000"></label>
+    <label>Thin Outline <input type="color" id="thinOutlineColor" value="#ffffff"></label>
+    <label>Thick Outline <input type="color" id="thickOutlineColor" value="#ff69b4"></label>
+
+    <label>
+      <input type="checkbox" id="shadowToggle">
+      Drop Shadow
+    </label>
+
+    <label>Shadow Color <input type="color" id="shadowColor" value="#000000"></label>
+    <label>Blur <input type="range" id="shadowBlur" min="0" max="50" value="20"></label>
+    <label>X <input type="range" id="shadowX" min="-50" max="50" value="8"></label>
+    <label>Y <input type="range" id="shadowY" min="-50" max="50" value="8"></label>
+
+    <input type="file" id="fontUpload" accept=".ttf,.otf" />
+
+    <button id="exportPNG">Export PNG</button>
+  </div>
+
+  <canvas id="canvas" width="800" height="400"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/6.0.0/fabric.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
